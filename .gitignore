@@ -3,3 +3,6 @@
 
 # frontend ignores
 /frontend/node_modules/
+
+# general
+architecture.md
