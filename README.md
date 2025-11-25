@@ -49,6 +49,7 @@ A simulated trading exchange with:
   - `options_pricing`: functions for Black-Scholes & Greeks (may be backend or reused in frontend)
 
 - **Frontend** (React + TypeScript)
+
   - Connects to REST for initial data
   - Connects to WebSocket for live updates
   - Components:
@@ -58,3 +59,8 @@ A simulated trading exchange with:
     - `MarketHeader` (shows current price)
     - `OptionsPanel` (inputs + results)
     - `PayoffChart`
+
+- **Setup** (Launching Locally)
+  - Run `cd backend`
+  - Activate `venv` using `source .venv/bin/activate`
+  -

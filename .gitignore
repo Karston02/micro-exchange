@@ -1,0 +1,5 @@
+# backend ignores
+/backend/.venv/
+
+# frontend ignores
+/frontend/node_modules/
