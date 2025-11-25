@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { OrderBook } from "./components";
+import { OrderBook, TradesList } from "./components";
 import "./App.css";
 
 function App() {
@@ -49,6 +49,7 @@ function App() {
 
       <main className="app__main">
         <OrderBook />
+        <TradesList />
       </main>
     </div>
   );
