@@ -63,4 +63,8 @@ A simulated trading exchange with:
 - **Setup** (Launching Locally)
   - Run `cd backend`
   - Activate `venv` using `source .venv/bin/activate`
-  -
+  - Start the server by running `uvicorn main:app --reload`
+    - This will run on port `8000`
+  - In another terminal, run `cd frontend`
+  - After installing dependencies, run `npm run dev`
+    - This will run on port `5173`
