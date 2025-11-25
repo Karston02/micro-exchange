@@ -15,7 +15,8 @@ class ExecutedTrade(BaseModel):
     price: float
     quantity: float
     side: str  # "buy" or "sell"
-
+    timestamp: str
+    ticker: str
 
 """
 Container for a list of executed trades.

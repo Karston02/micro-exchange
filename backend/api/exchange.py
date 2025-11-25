@@ -33,9 +33,9 @@ Returns the latest executed trades (most recent first).
 def get_trades():
     # just fake data for now
     trades = [
-        ExecutedTrade(price=100.15, quantity=3.5, side="buy"),
-        ExecutedTrade(price=100.0, quantity=1.25, side="sell"),
-        ExecutedTrade(price=99.85, quantity=2.0, side="buy"),
-        ExecutedTrade(price=99.75, quantity=4.1, side="sell"),
+        ExecutedTrade(price=100.15, quantity=3.5, side="buy", timestamp="2024-06-01T12:00:00Z", ticker="AAPL"),
+        ExecutedTrade(price=100.0, quantity=1.25, side="sell", timestamp="2024-06-01T12:01:00Z", ticker="AAPL"),
+        ExecutedTrade(price=99.85, quantity=2.0, side="buy", timestamp="2024-06-01T12:02:00Z", ticker="AAPL"),
+        ExecutedTrade(price=99.75, quantity=4.1, side="sell", timestamp="2024-06-01T12:03:00Z", ticker="AAPL"),
     ]
     return TradesSnapshot(trades=trades)
