@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from models.order_book import PriceLevel, OrderBookSnapshot
+from models.trades import ExecutedTrade, TradesSnapshot
 
 router = APIRouter(prefix="/exchange", tags=["exchange"])
 
@@ -23,3 +24,18 @@ def get_orderbook():
         asks=asks,
         last_traded_price=100.0,
     )
+
+
+"""
+Returns the latest executed trades (most recent first).
+"""
+@router.get("/trades", response_model=TradesSnapshot)
+def get_trades():
+    # just fake data for now
+    trades = [
+        ExecutedTrade(price=100.15, quantity=3.5, side="buy"),
+        ExecutedTrade(price=100.0, quantity=1.25, side="sell"),
+        ExecutedTrade(price=99.85, quantity=2.0, side="buy"),
+        ExecutedTrade(price=99.75, quantity=4.1, side="sell"),
+    ]
+    return TradesSnapshot(trades=trades)
