@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { OrderBook } from "./components";
+import "./App.css";
 
 function App() {
   const [backendStatus, setBackendStatus] = useState<
@@ -22,20 +23,31 @@ function App() {
   }, []);
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", padding: "1.5rem" }}>
-      <header style={{ marginBottom: "1.5rem" }}>
-        <h1>Micro Exchange + Options Lab</h1>
-        <p>
-          Backend:{" "}
+    <div className="app">
+      <header className="app__header">
+        <div>
+          <p className="app__eyebrow">Micro Exchange</p>
+          <h1 className="app__title">Options Lab</h1>
+        </div>
+        <div
+          className={`status-pill status-pill--${
+            backendStatus === "error"
+              ? "error"
+              : backendStatus === "ok"
+              ? "ok"
+              : "checking"
+          }`}
+        >
+          <span className="status-pill__dot" />
           {backendStatus === "checking"
-            ? "checking..."
+            ? "Checking connection..."
             : backendStatus === "ok"
-            ? "✅ connected"
-            : "❌ error"}
-        </p>
+            ? "Connected"
+            : "Connection Error"}
+        </div>
       </header>
 
-      <main>
+      <main className="app__main">
         <OrderBook />
       </main>
     </div>
