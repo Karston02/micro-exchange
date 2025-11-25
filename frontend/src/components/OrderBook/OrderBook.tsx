@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { OrderBookSnapshot, PriceLevel } from "../../types";
+import "./OrderBook.css";
 
 export function OrderBook() {
   const [data, setData] = useState<OrderBookSnapshot | null>(null);
@@ -24,25 +25,27 @@ export function OrderBook() {
   }, []);
 
   if (error) {
-    return <p style={{ color: "red" }}>Error loading order book: {error}</p>;
+    return (
+      <p className="order-book__error">Error loading order book: {error}</p>
+    );
   }
 
   if (!data) {
-    return <p>Loading order book...</p>;
+    return <p className="order-book__loading">Loading order book...</p>;
   }
 
   return (
-    <div>
-      <h2>Order Book</h2>
-      <p>
+    <div className="order-book">
+      <h2 className="order-book__title">Order Book</h2>
+      <p className="order-book__last-price">
         Last traded price:{" "}
         {data.last_traded_price !== null ? `$${data.last_traded_price}` : "—"}
       </p>
 
-      <div style={{ display: "flex", gap: "1.5rem" }}>
-        <div>
-          <h3>Bids</h3>
-          <table>
+      <div className="order-book__tables">
+        <div className="order-book__section order-book__section--bids">
+          <h3 className="order-book__subtitle">Bids</h3>
+          <table className="order-book__table order-book__table--bids">
             <thead>
               <tr>
                 <th>Price</th>
@@ -60,9 +63,9 @@ export function OrderBook() {
           </table>
         </div>
 
-        <div>
-          <h3>Asks</h3>
-          <table>
+        <div className="order-book__section order-book__section--asks">
+          <h3 className="order-book__subtitle">Asks</h3>
+          <table className="order-book__table order-book__table--asks">
             <thead>
               <tr>
                 <th>Price</th>
