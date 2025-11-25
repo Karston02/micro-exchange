@@ -1,0 +1,111 @@
+.trades {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 8px 20px rgba(0, 0, 0, 0.25);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.trades__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.trades__title {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.trades__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.trades__table th,
+.trades__table td {
+  padding: 0.45rem 0.5rem;
+  text-align: right;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.trades__table th:first-child,
+.trades__table td:first-child {
+  text-align: left;
+}
+
+.trades__table th {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.trades__row {
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.trades__row:hover {
+  background: rgba(255, 255, 255, 0.03);
+  transform: translateY(-1px);
+}
+
+.trades__row--buy td {
+  color: var(--bid);
+}
+
+.trades__row--sell td {
+  color: var(--ask);
+}
+
+.trades__price {
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.trades__qty {
+  color: var(--text);
+}
+
+.trades__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.trades__error {
+  color: #f87171;
+  font-weight: 700;
+}
+
+.trades__loading {
+  color: var(--muted);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  border: 1px solid var(--border);
+  background: var(--bg-panel-soft);
+  color: var(--text);
+}
+
+.pill--buy {
+  color: var(--bid);
+  border-color: rgba(22, 163, 74, 0.3);
+  background: rgba(22, 163, 74, 0.08);
+}
+
+.pill--sell {
+  color: var(--ask);
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+}
