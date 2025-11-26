@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List
+from .order import Side
 
 """
 Represents an executed trade including its price, quantity, and direction.
@@ -8,13 +9,13 @@ Example:
 {
     "price": 100.25,
     "quantity": 5.0,
-    "side": "buy"
+    "side": "BUY"
 }
 """
 class ExecutedTrade(BaseModel):
     price: float
     quantity: float
-    side: str  # "buy" or "sell"
+    side: Side
     timestamp: str
     ticker: str
 
