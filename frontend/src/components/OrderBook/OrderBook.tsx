@@ -1,28 +1,9 @@
-import { useEffect, useState } from "react";
-import type { OrderBookSnapshot, PriceLevel } from "../../types";
+import type { PriceLevel } from "../../types";
+import { useMarketFeed } from "../../hooks/useMarketFeed";
 import "./OrderBook.css";
 
 export function OrderBook() {
-  const [data, setData] = useState<OrderBookSnapshot | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchOrderBook = async () => {
-      try {
-        const res = await fetch("http://127.0.0.1:8000/exchange/orderbook");
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
-        }
-        const json = (await res.json()) as OrderBookSnapshot;
-        setData(json);
-      } catch (e: unknown) {
-        console.error(e);
-        setError(e instanceof Error ? e.message : "Failed to load order book");
-      }
-    };
-
-    fetchOrderBook();
-  }, []);
+  const { orderbook: data, error } = useMarketFeed();
 
   if (error) {
     return (
