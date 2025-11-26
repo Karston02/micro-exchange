@@ -63,6 +63,7 @@ A simulated trading exchange with:
 - **Setup** (Launching Locally)
   - Run `cd backend`
   - Activate `venv` using `source .venv/bin/activate`
+  - Install deps (includes WebSocket transport): `pip install -r requirements.txt`
   - Start the server by running `uvicorn main:app --reload`
     - This will run on port `8000`
   - In another terminal, run `cd frontend`
