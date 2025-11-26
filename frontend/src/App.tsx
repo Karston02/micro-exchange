@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { OrderBook, TradesList } from "./components";
+import { OrderBook, TradesList, OrderEntryForm } from "./components";
+import { MarketFeedProvider } from "./hooks/MarketFeedProvider";
 import "./App.css";
 
 function App() {
@@ -23,35 +24,44 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
-      <header className="app__header">
-        <div>
-          <p className="app__eyebrow">Micro Exchange</p>
-          <h1 className="app__title">Options Lab</h1>
-        </div>
-        <div
-          className={`status-pill status-pill--${
-            backendStatus === "error"
-              ? "error"
+    <MarketFeedProvider>
+      <div className="app">
+        <header className="app__header">
+          <div>
+            <p className="app__eyebrow">Micro Exchange</p>
+            <h1 className="app__title">Options Lab</h1>
+          </div>
+          <div
+            className={`status-pill status-pill--${
+              backendStatus === "error"
+                ? "error"
+                : backendStatus === "ok"
+                ? "ok"
+                : "checking"
+            }`}
+          >
+            <span className="status-pill__dot" />
+            {backendStatus === "checking"
+              ? "Checking connection..."
               : backendStatus === "ok"
-              ? "ok"
-              : "checking"
-          }`}
-        >
-          <span className="status-pill__dot" />
-          {backendStatus === "checking"
-            ? "Checking connection..."
-            : backendStatus === "ok"
-            ? "Connected"
-            : "Connection Error"}
-        </div>
-      </header>
+              ? "Connected"
+              : "Connection Error"}
+          </div>
+        </header>
 
-      <main className="app__main">
-        <OrderBook />
-        <TradesList />
-      </main>
-    </div>
+        <main className="app__main">
+          <div className="app__panel app__panel--full">
+            <OrderEntryForm />
+          </div>
+          <div className="app__panel">
+            <OrderBook />
+          </div>
+          <div className="app__panel">
+            <TradesList />
+          </div>
+        </main>
+      </div>
+    </MarketFeedProvider>
   );
 }
 

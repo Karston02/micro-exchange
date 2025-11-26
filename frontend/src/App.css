@@ -68,8 +68,22 @@ body {
 
 .app__main {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.app__panel {
+  min-width: 0;
+}
+
+.app__panel--full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+  .app__main {
+    grid-template-columns: 1fr;
+  }
 }
 
 .status-pill {
