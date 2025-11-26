@@ -1,27 +1,10 @@
-import { useEffect, useState } from "react";
-import type { ExecutedTrade, TradesSnapshot } from "../../types";
+import type { ExecutedTrade } from "../../types";
 import { Side } from "../../types/enums/side";
+import { useMarketFeed } from "../../hooks/useMarketFeed";
 import "./TradesList.css";
 
 export function TradesList() {
-  const [data, setData] = useState<TradesSnapshot | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchTrades = async () => {
-      try {
-        const res = await fetch("http://127.0.0.1:8000/exchange/trades");
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json = (await res.json()) as TradesSnapshot;
-        setData(json);
-      } catch (e: unknown) {
-        console.error(e);
-        setError(e instanceof Error ? e.message : "Failed to load trades");
-      }
-    };
-
-    fetchTrades();
-  }, []);
+  const { trades: data, error } = useMarketFeed();
 
   if (error) {
     return <p className="trades__error">Error loading trades: {error}</p>;
