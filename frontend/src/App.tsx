@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { OrderBook, TradesList, OrderEntryForm } from "./components";
+import {
+  OrderBook,
+  TradesList,
+  OrderEntryForm,
+  OptionPricing,
+} from "./components";
 import { MarketFeedProvider } from "./hooks/MarketFeedProvider";
 import "./App.css";
 
@@ -29,7 +34,7 @@ function App() {
         <header className="app__header">
           <div>
             <p className="app__eyebrow">Micro Exchange</p>
-            <h1 className="app__title">Options Lab</h1>
+            <h1 className="app__title">Playground</h1>
           </div>
           <div
             className={`status-pill status-pill--${
@@ -58,6 +63,9 @@ function App() {
           </div>
           <div className="app__panel">
             <TradesList />
+          </div>
+          <div className="app__panel app__panel--full">
+            <OptionPricing />
           </div>
         </main>
       </div>
