@@ -16,6 +16,7 @@ type FeedStatus = "connecting" | "open" | "closed" | "error";
 type MarketFeedContextValue = {
   orderbook: OrderBookSnapshot | null;
   trades: TradesSnapshot | null;
+  lastTradedPrice: number | null;
   status: FeedStatus;
   error: string | null;
 };
@@ -35,6 +36,7 @@ export const MarketFeedContext = createContext<
 export function MarketFeedProvider({ children }: { children: ReactNode }) {
   const [orderbook, setOrderbook] = useState<OrderBookSnapshot | null>(null);
   const [trades, setTrades] = useState<TradesSnapshot | null>(null);
+  const [lastTradedPrice, setLastTradedPrice] = useState<number | null>(null);
   const [status, setStatus] = useState<FeedStatus>("connecting");
   const [error, setError] = useState<string | null>(null);
 
@@ -58,6 +60,7 @@ export function MarketFeedProvider({ children }: { children: ReactNode }) {
           const msg = JSON.parse(event.data) as MarketMessage;
           if (msg.type === "orderbook") {
             setOrderbook(msg.data);
+            setLastTradedPrice(msg.data.last_traded_price ?? null);
           } else if (msg.type === "trades") {
             setTrades(msg.data);
           }
@@ -90,8 +93,8 @@ export function MarketFeedProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ orderbook, trades, status, error }),
-    [orderbook, trades, status, error]
+    () => ({ orderbook, trades, lastTradedPrice, status, error }),
+    [orderbook, trades, lastTradedPrice, status, error]
   );
 
   return (

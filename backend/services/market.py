@@ -151,4 +151,26 @@ def build_orderbook_snapshot() -> OrderBookSnapshot:
 
 
 def build_trades_snapshot() -> TradesSnapshot:
-    return TradesSnapshot(trades=list(reversed(trades)))
+    # consolidate consecutive trades with same side/price to avoid spamming 1-lot prints
+    compressed: List[ExecutedTrade] = []
+    for trade in reversed(trades):  # newest first for output
+        
+        # combine with the last if the same side/price/ticker
+        if (
+            compressed
+            and compressed[-1].side == trade.side
+            and compressed[-1].price == trade.price
+            and compressed[-1].ticker == trade.ticker
+        ):
+            combined_qty = compressed[-1].quantity + trade.quantity
+            compressed[-1] = ExecutedTrade(
+                price=trade.price,
+                quantity=combined_qty,
+                side=trade.side,
+                timestamp=trade.timestamp,
+                ticker=trade.ticker,
+            )
+        else:
+            compressed.append(trade)
+
+    return TradesSnapshot(trades=compressed)
