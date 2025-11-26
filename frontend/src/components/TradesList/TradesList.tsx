@@ -46,7 +46,8 @@ export function TradesList() {
         </thead>
         <tbody>
           {data.trades.map((trade: ExecutedTrade, idx) => {
-            const sideClass = trade.side.toLowerCase();
+            const isBuy = trade.side === Side.BUY;
+            const sideClass = isBuy ? "buy" : "sell";
             return (
               <tr
                 key={`trade-${idx}`}
@@ -54,7 +55,7 @@ export function TradesList() {
               >
                 <td>
                   <span className={`pill pill--${sideClass}`}>
-                    {trade.side === Side.BUY ? "Buy" : "Sell"}
+                    {isBuy ? "Buy" : "Sell"}
                   </span>
                 </td>
                 <td className="trades__price">${trade.price.toFixed(2)}</td>
