@@ -51,6 +51,15 @@ async def place_order(side: Side, price: float, quantity: float):
 
 
 """
+Used to retrieve current trading price
+"""
+@router.get("/price")
+def get_price():
+    snapshot = build_orderbook_snapshot()
+    return {"last_traded_price": snapshot.last_traded_price}
+
+
+"""
 WebSocket feed for market updates (order book + trades).
 """
 @router.websocket("/ws/market")
