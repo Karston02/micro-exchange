@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ExecutedTrade, TradesSnapshot } from "../../types";
+import { Side } from "../../types/enums/side";
 import "./TradesList.css";
 
 export function TradesList() {
@@ -44,20 +45,23 @@ export function TradesList() {
           </tr>
         </thead>
         <tbody>
-          {data.trades.map((trade: ExecutedTrade, idx) => (
-            <tr
-              key={`trade-${idx}`}
-              className={`trades__row trades__row--${trade.side}`}
-            >
-              <td>
-                <span className={`pill pill--${trade.side}`}>
-                  {trade.side === "buy" ? "Buy" : "Sell"}
-                </span>
-              </td>
-              <td className="trades__price">${trade.price.toFixed(2)}</td>
-              <td className="trades__qty">{trade.quantity}</td>
-            </tr>
-          ))}
+          {data.trades.map((trade: ExecutedTrade, idx) => {
+            const sideClass = trade.side.toLowerCase();
+            return (
+              <tr
+                key={`trade-${idx}`}
+                className={`trades__row trades__row--${sideClass}`}
+              >
+                <td>
+                  <span className={`pill pill--${sideClass}`}>
+                    {trade.side === Side.BUY ? "Buy" : "Sell"}
+                  </span>
+                </td>
+                <td className="trades__price">${trade.price.toFixed(2)}</td>
+                <td className="trades__qty">{trade.quantity}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

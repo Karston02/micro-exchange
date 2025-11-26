@@ -1,7 +1,9 @@
+import type { Side } from "./enums";
+
 export type ExecutedTrade = {
   price: number;
   quantity: number;
-  side: "buy" | "sell";
+  side: Side;
   timestamp: string;
   ticker: string;
 };
